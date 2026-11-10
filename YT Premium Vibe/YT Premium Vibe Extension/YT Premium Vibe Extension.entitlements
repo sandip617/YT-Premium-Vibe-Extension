@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Entitlements for the Safari extension's native handler.
+  Safari extensions must be sandboxed, so these grant only what the
+  Download feature needs to run yt-dlp on this Mac:
+    - network access (yt-dlp downloads from YouTube; child processes inherit the sandbox)
+    - read access to Homebrew and Python installs (to run yt-dlp and ffmpeg)
+    - read/write in your home folder (so any download folder works, e.g. ~/Movies/YouTube)
+  "temporary-exception" entitlements are fine for a local build you run yourself.
+  They would not be accepted on the Mac App Store.
+-->
+<plist version="1.0">
+<dict>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.security.files.downloads.read-write</key>
+	<true/>
+	<key>com.apple.security.files.user-selected.read-only</key>
+	<true/>
+	<key>com.apple.security.temporary-exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/opt/homebrew/</string>
+		<string>/usr/local/</string>
+		<string>/Library/Frameworks/Python.framework/</string>
+	</array>
+	<key>com.apple.security.temporary-exception.files.home-relative-path.read-write</key>
+	<array>
+		<string>/</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YT Premium Vibe</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="bg-orb bg-orb--a"></div>
+  <div class="bg-orb bg-orb--b"></div>
+
+  <header class="top">
+    <div class="brand">
+      <img class="logo" src="../icons/icon-96.png" width="40" height="40" alt="">
+      <div>
+        <h1>YT Premium Vibe</h1>
+        <p class="tagline">Make YouTube feel premium</p>
+      </div>
+    </div>
+    <span class="saved" id="saved" aria-live="polite">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+      Saved
+    </span>
+  </header>
+
+  <div class="summary" id="summary"></div>
+
+  <main id="features" class="features"></main>
+
+  <footer class="foot">
+    <span>v<span id="version">1.0.0</span></span>
+    <span class="dot">·</span>
+    <span>Settings save automatically</span>
+  </footer>
+
+  <script src="../shared/settings.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

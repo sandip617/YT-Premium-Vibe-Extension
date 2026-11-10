@@ -1,0 +1,635 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F1BDDF4430A309FE0031EE00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BDDF4330A309FE0031EE00 /* AppDelegate.swift */; };
+		F1BDDF4830A309FE0031EE00 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = F1BDDF4630A309FE0031EE00 /* Main.html */; };
+		F1BDDF4A30A309FE0031EE00 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F1BDDF4930A309FE0031EE00 /* Icon.png */; };
+		F1BDDF4C30A309FE0031EE00 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = F1BDDF4B30A309FE0031EE00 /* Style.css */; };
+		F1BDDF4E30A309FE0031EE00 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = F1BDDF4D30A309FE0031EE00 /* Script.js */; };
+		F1BDDF5030A309FE0031EE00 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BDDF4F30A309FE0031EE00 /* ViewController.swift */; };
+		F1BDDF5330A309FE0031EE00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1BDDF5130A309FE0031EE00 /* Main.storyboard */; };
+		F1BDDF5530A309FF0031EE00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1BDDF5430A309FF0031EE00 /* Assets.xcassets */; };
+		F1BDDF5C30A309FF0031EE00 /* YT Premium Vibe Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F1BDDF5B30A309FF0031EE00 /* YT Premium Vibe Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F1BDDF6130A309FF0031EE00 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BDDF6030A309FF0031EE00 /* SafariWebExtensionHandler.swift */; };
+		F1BDDF7530A30A000031EE00 /* page in Resources */ = {isa = PBXBuildFile; fileRef = F1BDDF6D30A30A000031EE00 /* page */; };
+		F1BDDF7630A30A000031EE00 /* popup in Resources */ = {isa = PBXBuildFile; fileRef = F1BDDF6E30A30A000031EE00 /* popup */; };
+		F1BDDF7730A30A000031EE00 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = F1BDDF6F30A30A000031EE00 /* background.js */; };
+		F1BDDF7830A30A000031EE00 /* content in Resources */ = {isa = PBXBuildFile; fileRef = F1BDDF7030A30A000031EE00 /* content */; };
+		F1BDDF7930A30A000031EE00 /* shared in Resources */ = {isa = PBXBuildFile; fileRef = F1BDDF7130A30A000031EE00 /* shared */; };
+		F1BDDF7A30A30A000031EE00 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = F1BDDF7230A30A000031EE00 /* icons */; };
+		F1BDDF7B30A30A000031EE00 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = F1BDDF7330A30A000031EE00 /* manifest.json */; };
+		F1BDDF7C30A30A000031EE00 /* rules in Resources */ = {isa = PBXBuildFile; fileRef = F1BDDF7430A30A000031EE00 /* rules */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F1BDDF5D30A309FF0031EE00 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1BDDF3830A309FE0031EE00 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1BDDF5A30A309FF0031EE00;
+			remoteInfo = "YT Premium Vibe Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F1BDDF6830A309FF0031EE00 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F1BDDF5C30A309FF0031EE00 /* YT Premium Vibe Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F1BDDF4030A309FE0031EE00 /* YT Premium Vibe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "YT Premium Vibe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1BDDF4330A309FE0031EE00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F1BDDF4730A309FE0031EE00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/Main.html; sourceTree = "<group>"; };
+		F1BDDF4930A309FE0031EE00 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		F1BDDF4B30A309FE0031EE00 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		F1BDDF4D30A309FE0031EE00 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		F1BDDF4F30A309FE0031EE00 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F1BDDF5230A309FE0031EE00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F1BDDF5430A309FF0031EE00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F1BDDF5630A309FF0031EE00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1BDDF5B30A309FF0031EE00 /* YT Premium Vibe Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "YT Premium Vibe Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1BDDF6030A309FF0031EE00 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		F1BDDF6230A309FF0031EE00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1BDDF6D30A30A000031EE00 /* page */ = {isa = PBXFileReference; lastKnownFileType = folder; name = page; path = ../../extension/page; sourceTree = "<group>"; };
+		F1BDDF6E30A30A000031EE00 /* popup */ = {isa = PBXFileReference; lastKnownFileType = folder; name = popup; path = ../../extension/popup; sourceTree = "<group>"; };
+		F1BDDF6F30A30A000031EE00 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = background.js; path = ../../extension/background.js; sourceTree = "<group>"; };
+		F1BDDF7030A30A000031EE00 /* content */ = {isa = PBXFileReference; lastKnownFileType = folder; name = content; path = ../../extension/content; sourceTree = "<group>"; };
+		F1BDDF7130A30A000031EE00 /* shared */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shared; path = ../../extension/shared; sourceTree = "<group>"; };
+		F1BDDF7230A30A000031EE00 /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = icons; path = ../../extension/icons; sourceTree = "<group>"; };
+		F1BDDF7330A30A000031EE00 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../extension/manifest.json; sourceTree = "<group>"; };
+		F1BDDF7430A30A000031EE00 /* rules */ = {isa = PBXFileReference; lastKnownFileType = folder; name = rules; path = ../../extension/rules; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F1BDDF3D30A309FE0031EE00 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1BDDF5830A309FF0031EE00 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F1BDDF3730A309FE0031EE00 = {
+			isa = PBXGroup;
+			children = (
+				F1BDDF4230A309FE0031EE00 /* YT Premium Vibe */,
+				F1BDDF5F30A309FF0031EE00 /* YT Premium Vibe Extension */,
+				F1BDDF4130A309FE0031EE00 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F1BDDF4130A309FE0031EE00 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1BDDF4030A309FE0031EE00 /* YT Premium Vibe.app */,
+				F1BDDF5B30A309FF0031EE00 /* YT Premium Vibe Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1BDDF4230A309FE0031EE00 /* YT Premium Vibe */ = {
+			isa = PBXGroup;
+			children = (
+				F1BDDF4330A309FE0031EE00 /* AppDelegate.swift */,
+				F1BDDF4F30A309FE0031EE00 /* ViewController.swift */,
+				F1BDDF5130A309FE0031EE00 /* Main.storyboard */,
+				F1BDDF5430A309FF0031EE00 /* Assets.xcassets */,
+				F1BDDF5630A309FF0031EE00 /* Info.plist */,
+				F1BDDF4530A309FE0031EE00 /* Resources */,
+			);
+			path = "YT Premium Vibe";
+			sourceTree = "<group>";
+		};
+		F1BDDF4530A309FE0031EE00 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F1BDDF4630A309FE0031EE00 /* Main.html */,
+				F1BDDF4930A309FE0031EE00 /* Icon.png */,
+				F1BDDF4B30A309FE0031EE00 /* Style.css */,
+				F1BDDF4D30A309FE0031EE00 /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F1BDDF5F30A309FF0031EE00 /* YT Premium Vibe Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F1BDDF6C30A30A000031EE00 /* Resources */,
+				F1BDDF6030A309FF0031EE00 /* SafariWebExtensionHandler.swift */,
+				F1BDDF6230A309FF0031EE00 /* Info.plist */,
+			);
+			path = "YT Premium Vibe Extension";
+			sourceTree = "<group>";
+		};
+		F1BDDF6C30A30A000031EE00 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F1BDDF6D30A30A000031EE00 /* page */,
+				F1BDDF6E30A30A000031EE00 /* popup */,
+				F1BDDF6F30A30A000031EE00 /* background.js */,
+				F1BDDF7030A30A000031EE00 /* content */,
+				F1BDDF7130A30A000031EE00 /* shared */,
+				F1BDDF7230A30A000031EE00 /* icons */,
+				F1BDDF7330A30A000031EE00 /* manifest.json */,
+				F1BDDF7430A30A000031EE00 /* rules */,
+			);
+			name = Resources;
+			path = "YT Premium Vibe Extension";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F1BDDF3F30A309FE0031EE00 /* YT Premium Vibe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1BDDF6930A309FF0031EE00 /* Build configuration list for PBXNativeTarget "YT Premium Vibe" */;
+			buildPhases = (
+				F1BDDF3C30A309FE0031EE00 /* Sources */,
+				F1BDDF3D30A309FE0031EE00 /* Frameworks */,
+				F1BDDF3E30A309FE0031EE00 /* Resources */,
+				F1BDDF6830A309FF0031EE00 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1BDDF5E30A309FF0031EE00 /* PBXTargetDependency */,
+			);
+			name = "YT Premium Vibe";
+			packageProductDependencies = (
+			);
+			productName = "YT Premium Vibe";
+			productReference = F1BDDF4030A309FE0031EE00 /* YT Premium Vibe.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F1BDDF5A30A309FF0031EE00 /* YT Premium Vibe Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1BDDF6530A309FF0031EE00 /* Build configuration list for PBXNativeTarget "YT Premium Vibe Extension" */;
+			buildPhases = (
+				F1BDDF5730A309FF0031EE00 /* Sources */,
+				F1BDDF5830A309FF0031EE00 /* Frameworks */,
+				F1BDDF5930A309FF0031EE00 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "YT Premium Vibe Extension";
+			packageProductDependencies = (
+			);
+			productName = "YT Premium Vibe Extension";
+			productReference = F1BDDF5B30A309FF0031EE00 /* YT Premium Vibe Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F1BDDF3830A309FE0031EE00 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2660;
+				LastUpgradeCheck = 2660;
+				TargetAttributes = {
+					F1BDDF3F30A309FE0031EE00 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					F1BDDF5A30A309FF0031EE00 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+				};
+			};
+			buildConfigurationList = F1BDDF3B30A309FE0031EE00 /* Build configuration list for PBXProject "YT Premium Vibe" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F1BDDF3730A309FE0031EE00;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = F1BDDF4130A309FE0031EE00 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F1BDDF3F30A309FE0031EE00 /* YT Premium Vibe */,
+				F1BDDF5A30A309FF0031EE00 /* YT Premium Vibe Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F1BDDF3E30A309FE0031EE00 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1BDDF4A30A309FE0031EE00 /* Icon.png in Resources */,
+				F1BDDF5330A309FE0031EE00 /* Main.storyboard in Resources */,
+				F1BDDF4E30A309FE0031EE00 /* Script.js in Resources */,
+				F1BDDF4830A309FE0031EE00 /* Main.html in Resources */,
+				F1BDDF5530A309FF0031EE00 /* Assets.xcassets in Resources */,
+				F1BDDF4C30A309FE0031EE00 /* Style.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1BDDF5930A309FF0031EE00 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1BDDF7C30A30A000031EE00 /* rules in Resources */,
+				F1BDDF7930A30A000031EE00 /* shared in Resources */,
+				F1BDDF7B30A30A000031EE00 /* manifest.json in Resources */,
+				F1BDDF7530A30A000031EE00 /* page in Resources */,
+				F1BDDF7730A30A000031EE00 /* background.js in Resources */,
+				F1BDDF7A30A30A000031EE00 /* icons in Resources */,
+				F1BDDF7830A30A000031EE00 /* content in Resources */,
+				F1BDDF7630A30A000031EE00 /* popup in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F1BDDF3C30A309FE0031EE00 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1BDDF5030A309FE0031EE00 /* ViewController.swift in Sources */,
+				F1BDDF4430A309FE0031EE00 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1BDDF5730A309FF0031EE00 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1BDDF6130A309FF0031EE00 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F1BDDF5E30A309FF0031EE00 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1BDDF5A30A309FF0031EE00 /* YT Premium Vibe Extension */;
+			targetProxy = F1BDDF5D30A309FF0031EE00 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F1BDDF4630A309FE0031EE00 /* Main.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1BDDF4730A309FE0031EE00 /* Base */,
+			);
+			name = Main.html;
+			sourceTree = "<group>";
+		};
+		F1BDDF5130A309FE0031EE00 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1BDDF5230A309FE0031EE00 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F1BDDF6330A309FF0031EE00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F1BDDF6430A309FF0031EE00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		F1BDDF6630A309FF0031EE00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "YT Premium Vibe Extension/YT Premium Vibe Extension.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_FILE_ACCESS_DOWNLOADS_FOLDER = readwrite;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "YT Premium Vibe Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "YT Premium Vibe Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ytpremiumvibe.app.Extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F1BDDF6730A309FF0031EE00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "YT Premium Vibe Extension/YT Premium Vibe Extension.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_FILE_ACCESS_DOWNLOADS_FOLDER = readwrite;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "YT Premium Vibe Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "YT Premium Vibe Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ytpremiumvibe.app.Extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		F1BDDF6A30A309FF0031EE00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "YT Premium Vibe/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "YT Premium Vibe";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ytpremiumvibe.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F1BDDF6B30A309FF0031EE00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "YT Premium Vibe/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "YT Premium Vibe";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ytpremiumvibe.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F1BDDF3B30A309FE0031EE00 /* Build configuration list for PBXProject "YT Premium Vibe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1BDDF6330A309FF0031EE00 /* Debug */,
+				F1BDDF6430A309FF0031EE00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1BDDF6530A309FF0031EE00 /* Build configuration list for PBXNativeTarget "YT Premium Vibe Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1BDDF6630A309FF0031EE00 /* Debug */,
+				F1BDDF6730A309FF0031EE00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1BDDF6930A309FF0031EE00 /* Build configuration list for PBXNativeTarget "YT Premium Vibe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1BDDF6A30A309FF0031EE00 /* Debug */,
+				F1BDDF6B30A309FF0031EE00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F1BDDF3830A309FE0031EE00 /* Project object */;
+}
