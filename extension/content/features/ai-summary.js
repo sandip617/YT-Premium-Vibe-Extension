@@ -375,7 +375,7 @@
     input.addEventListener('keydown', (e) => { if (e.key === 'Enter') save(); });
     return el('div', { class: 'ytpv-card' },
       el('div', { class: 'ytpv-card__title' }, 'Connect Google Gemini'),
-      el('p', {}, message || 'Paste your free Gemini API key once. It is stored only on this Mac (in Safari extension storage).'),
+      el('p', {}, message || 'Paste your free Gemini API key once. It stays on this Mac, with a backup in your Mac’s Keychain, so you won’t have to paste it again.'),
       el('ol', { class: 'ytpv-card__steps' },
         el('li', {}, 'Open ', el('a', { href: 'https://aistudio.google.com/apikey', target: '_blank', rel: 'noopener' }, 'aistudio.google.com/apikey')),
         el('li', {}, 'Click “Create API key” and copy it'),
@@ -511,8 +511,16 @@
   async function generate(session) {
     ui.body.replaceChildren(statusCard('Getting video details…'));
     if (!YTPV.settings.gemini.apiKey) {
-      ui.body.replaceChildren(keyCard());
-      return;
+      // Safari may have wiped storage: ask the Mac app for the backed-up key first.
+      try {
+        const res = await YTPV.send({ type: 'restoreSettings' });
+        if (res?.apiKey) YTPV.settings.gemini.apiKey = res.apiKey;
+      } catch (_) {}
+      if (session !== current) return;
+      if (!YTPV.settings.gemini.apiKey) {
+        ui.body.replaceChildren(keyCard());
+        return;
+      }
     }
 
     // Video info (retry until the player shows the new video after navigation).

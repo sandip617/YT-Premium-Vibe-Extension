@@ -233,13 +233,63 @@ async function syncAdRules(settings) {
   }
 }
 
+/* ------------------------------------------------------------------ */
+/* 5. Settings backup in the macOS app (Keychain + file)              */
+/*    Safari deletes an extension's storage when it's removed (e.g. an */
+/*    unsigned build at restart, or after re-signing). We keep a copy  */
+/*    natively and restore it automatically.                           */
+/* ------------------------------------------------------------------ */
+
+let restoreDone = null; // promise: backups are only written after a restore attempt
+
+async function restoreIfWiped() {
+  const { settings: stored } = await api.storage.local.get('settings');
+  if (stored && stored.gemini?.apiKey) return { restored: false, apiKey: stored.gemini.apiKey };
+  const res = await sendNative({ cmd: 'restore' });
+  if (!res?.ok) return { restored: false, apiKey: '' };
+  let backup = null;
+  try { backup = res.settings ? JSON.parse(res.settings) : null; } catch (_) {}
+  if (!backup && !res.apiKey) return { restored: false, apiKey: '' };
+  // Stored settings win if they exist; otherwise use the backup. The key comes from the Keychain.
+  const merged = YTPVSettings.merge(YTPVSettings.DEFAULTS, stored || backup || {});
+  if (res.apiKey && !merged.gemini.apiKey) merged.gemini.apiKey = res.apiKey;
+  await YTPVSettings.save(merged);
+  return { restored: true, apiKey: merged.gemini.apiKey };
+}
+
+function ensureRestored() {
+  restoreDone = restoreDone || restoreIfWiped().catch(() => ({ restored: false, apiKey: '' }));
+  return restoreDone;
+}
+
+let backupTimer = null;
+api.storage.onChanged.addListener((changes, area) => {
+  if (area !== 'local' || !changes.settings) return;
+  const next = changes.settings.newValue;
+  const prev = changes.settings.oldValue;
+  if (!next) return;
+  clearTimeout(backupTimer);
+  backupTimer = setTimeout(async () => {
+    await ensureRestored();
+    const { apiKey, ...gemini } = next.gemini || {};
+    const msg = { cmd: 'backup', settings: JSON.stringify({ ...next, gemini: { ...gemini, apiKey: '' } }) };
+    if (apiKey) msg.apiKey = apiKey;
+    else if (prev?.gemini?.apiKey) msg.apiKey = ''; // the user cleared the key on purpose
+    sendNative(msg);
+  }, 800);
+});
+
 YTPVSettings.onChange(syncAdRules);
 api.runtime.onInstalled.addListener(async () => {
+  await ensureRestored(); // bring back a wiped key/settings before writing defaults
   const s = await YTPVSettings.load();
   await YTPVSettings.save(s); // write defaults for new options
   syncAdRules(s);
 });
-api.runtime.onStartup?.addListener(async () => syncAdRules(await YTPVSettings.load()));
+api.runtime.onStartup?.addListener(async () => {
+  await ensureRestored();
+  syncAdRules(await YTPVSettings.load());
+});
 
 /* ------------------------------------------------------------------ */
 /* Message router                                                     */
@@ -252,6 +302,9 @@ api.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
         return { ok: true, segments: await getSponsorSegments(msg.videoId, msg.categories) };
       case 'native':
         return await sendNative(msg.payload);
+      case 'restoreSettings':
+        restoreDone = null; // check again: the content script found no key
+        return { ok: true, ...(await ensureRestored()) };
       default:
         return { ok: false, error: 'unknown_message' };
     }

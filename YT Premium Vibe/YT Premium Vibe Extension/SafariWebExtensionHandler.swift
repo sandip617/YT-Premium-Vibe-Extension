@@ -21,6 +21,7 @@
 
 import AppKit
 import CryptoKit
+import Security
 import SafariServices
 import os.log
 
@@ -236,6 +237,8 @@ enum Downloader {
         case "status": return status(msg)
         case "cancel": return cancel(msg)
         case "reveal": return reveal(msg)
+        case "backup": return Backup.save(msg)
+        case "restore": return Backup.load()
         default: return ["ok": false, "error": "unknown_command"]
         }
     }
@@ -480,5 +483,68 @@ enum Downloader {
             let date = (try? f.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate ?? Date()
             if date < cutoff { try? fm.removeItem(at: f) }
         }
+    }
+}
+
+// MARK: - Settings backup
+
+/// Safari deletes an extension's saved data when the extension is removed, for
+/// example when an unsigned build is switched off at restart or the app is
+/// re-signed. A copy is kept here so it can be restored automatically:
+/// the Gemini API key goes in the Keychain, and the other settings go in a JSON
+/// file in this extension's container.
+enum Backup {
+    static let service = "YT Premium Vibe"
+    static let account = "gemini-api-key"
+
+    static let file: URL = {
+        let support = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        try? FileManager.default.createDirectory(at: support, withIntermediateDirectories: true)
+        return support.appendingPathComponent("settings-backup.json")
+    }()
+
+    static func save(_ msg: [String: Any]) -> [String: Any] {
+        if let settings = msg["settings"] as? String, let data = settings.data(using: .utf8) {
+            try? data.write(to: file, options: .atomic)
+        }
+        if let key = msg["apiKey"] as? String {
+            key.isEmpty ? deleteKey() : storeKey(key)
+        }
+        return ["ok": true]
+    }
+
+    static func load() -> [String: Any] {
+        let settings = (try? String(contentsOf: file, encoding: .utf8)) ?? ""
+        return ["ok": true, "settings": settings, "apiKey": readKey() ?? ""]
+    }
+
+    static func baseQuery() -> [String: Any] {
+        [kSecClass as String: kSecClassGenericPassword,
+         kSecAttrService as String: service,
+         kSecAttrAccount as String: account]
+    }
+
+    static func storeKey(_ key: String) {
+        let data = Data(key.utf8)
+        let status = SecItemUpdate(baseQuery() as CFDictionary, [kSecValueData as String: data] as CFDictionary)
+        if status == errSecItemNotFound {
+            var add = baseQuery()
+            add[kSecValueData as String] = data
+            add[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
+            SecItemAdd(add as CFDictionary, nil)
+        }
+    }
+
+    static func readKey() -> String? {
+        var query = baseQuery()
+        query[kSecReturnData as String] = true
+        query[kSecMatchLimit as String] = kSecMatchLimitOne
+        var out: AnyObject?
+        guard SecItemCopyMatching(query as CFDictionary, &out) == errSecSuccess, let data = out as? Data else { return nil }
+        return String(data: data, encoding: .utf8)
+    }
+
+    static func deleteKey() {
+        SecItemDelete(baseQuery() as CFDictionary)
     }
 }
