@@ -36,6 +36,11 @@ Requirements: macOS 13+, the latest Safari, and Xcode. A paid Apple Developer ac
 
 The Xcode project points directly at the `extension/` folder. After editing code, press ⌘R again and reload YouTube.
 
+**Keep it on after restarting your Mac:** extensions built without a signing team switch off whenever Safari quits.
+If Xcode is signed in with your Apple ID (a free one is enough) and you have an *Apple Development* certificate,
+run `./install-on-my-mac.sh`. It signs the app with your certificate and installs it in Applications.
+Safari then treats the extension as signed, so it stays on and you don't need *Allow unsigned extensions*.
+
 ### AI Summary
 Get a free key at [aistudio.google.com/apikey](https://aistudio.google.com/apikey), then paste it in the panel (or in the popup).
 The key is stored only in Safari's extension storage. It is sent only to Google's Gemini API.
