@@ -10,7 +10,7 @@ It has 11 features in one extension, and each one can be turned on or off from a
 | 3 | **Custom Speed** | `S` / `D` / `R` = slower / faster / reset, 0.25× to 4× in 0.25 steps, with an on-screen indicator. Can remember the speed per channel |
 | 4 | **Smart Quality** | Highest quality in fullscreen, 720p in normal view. Switches instantly |
 | 5 | **Picture-in-Picture** | Native-looking PiP button in the player controls |
-| 6 | **Cinema Mode** | Softly blurs everything around the video. Hovering an area clears it |
+| 6 | **Cinema Mode** | One even blur over everything around the video. Move the mouse off the video to clear it. Videos open in the normal layout (suggestions on the right, comments below), not theater mode |
 | 7 | **Ad Blocker** | Network blocking, ad data removed before the player loads, ads fast-forwarded with auto-click on Skip, feed/banner ads hidden, ad-blocker warnings removed |
 | 8 | **Volume Boost** | Up to 300% with a slider in the player. A limiter prevents distortion |
 | 9 | **Download** | Best-quality video or audio only through yt-dlp, with progress on the button and *Show in Finder* when done |

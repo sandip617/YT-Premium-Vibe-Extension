@@ -1,22 +1,22 @@
 /**
  * FEATURE 6 — Cinema Mode (Blur)
  *
- * Four fixed glass panels (top / bottom / left / right) sit around the video
- * and softly blur whatever is behind them using backdrop-filter. Hovering a
- * panel's area fades it out so you can read or click what's underneath.
+ * One fixed glass layer covers the whole screen and blurs everything behind
+ * it using backdrop-filter, with a hole cut out (clip-path) exactly where the
+ * video is. A single layer means one even blur — no seams between panels.
+ * Moving the mouse off the video fades the blur out so you can read or click
+ * the page.
  *
- * Why overlays instead of blurring YouTube's own elements? The blur cost stays
+ * Why an overlay instead of blurring YouTube's own elements? The blur cost stays
  * the size of your screen (not the whole page), and YouTube's DOM is never
- * touched. The panels ignore the mouse (pointer-events: none), so every click
+ * touched. The layer ignores the mouse (pointer-events: none), so every click
  * goes straight through to YouTube.
  */
 (() => {
   const YTPV = globalThis.YTPV;
-  const SIDES = ['top', 'bottom', 'left', 'right'];
 
   let layer = null;
-  const regions = {};
-  const rects = {};
+  let hole = null;
   let rafPending = false;
   let resizeObs = null;
   let observedPlayer = null;
@@ -25,10 +25,6 @@
   function build() {
     if (layer?.isConnected) return;
     layer = YTPV.el('div', { id: 'ytpv-cinema', class: 'ytpv-cinema', hidden: true });
-    for (const side of SIDES) {
-      regions[side] = YTPV.el('div', { class: `ytpv-cinema__region ytpv-cinema__region--${side}` });
-      layer.append(regions[side]);
-    }
     document.body.append(layer);
     applyStyle();
   }
@@ -62,31 +58,17 @@
       observedPlayer = player;
     }
 
-    const vw = document.documentElement.clientWidth;
-    const vh = innerHeight;
-    const top = Math.max(0, r.top);
-    const bottom = Math.min(vh, r.bottom);
-    rects.top = { x: 0, y: 0, w: vw, h: top };
-    rects.bottom = { x: 0, y: bottom, w: vw, h: Math.max(0, vh - bottom) };
-    rects.left = { x: 0, y: top, w: Math.max(0, r.left), h: bottom - top };
-    rects.right = { x: r.right, y: top, w: Math.max(0, vw - r.right), h: bottom - top };
-
-    for (const side of SIDES) {
-      const q = rects[side];
-      const s = regions[side].style;
-      s.transform = `translate(${q.x}px, ${q.y}px)`;
-      s.width = `${q.w}px`;
-      s.height = `${q.h}px`;
-    }
+    hole = { l: r.left, t: r.top, r: r.right, b: r.bottom };
+    // Whole screen, minus the video rectangle (evenodd turns the inner rect into a hole).
+    layer.style.clipPath = `polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 100%, 0 0, ` +
+      `${hole.l}px ${hole.t}px, ${hole.r}px ${hole.t}px, ${hole.r}px ${hole.b}px, ${hole.l}px ${hole.b}px, ${hole.l}px ${hole.t}px)`;
     updateHover();
   }
 
   function updateHover() {
-    for (const side of SIDES) {
-      const q = rects[side];
-      const inside = !!mouse && q && mouse.x >= q.x && mouse.x < q.x + q.w && mouse.y >= q.y && mouse.y < q.y + q.h;
-      regions[side].classList.toggle('ytpv-cinema__region--clear', inside);
-    }
+    if (!layer || !hole) return;
+    const onVideo = !mouse || (mouse.x >= hole.l && mouse.x < hole.r && mouse.y >= hole.t && mouse.y < hole.b);
+    layer.classList.toggle('ytpv-cinema--clear', !onVideo);
   }
 
   let hoverRaf = false;
@@ -123,7 +105,7 @@
       resizeObs?.disconnect();
       resizeObs = observedPlayer = null;
       layer?.remove();
-      layer = null;
+      layer = hole = null;
     },
 
     onSettings() { applyStyle(); },

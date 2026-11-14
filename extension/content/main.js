@@ -90,6 +90,10 @@
     lastNav = `${key}@${now}`;
     checkVideo();
     each('onNavigate');
+    // Keep the normal layout (video + suggestions on the right, comments below): leave theater mode once per video.
+    setTimeout(() => {
+      if (document.querySelector('ytd-watch-flexy[theater]')) document.querySelector('#movie_player .ytp-size-button')?.click();
+    }, 600);
   }
   document.addEventListener('yt-navigate-finish', navigated);
   document.addEventListener('yt-navigate-start', () => each('onNavigateStart'));

@@ -284,21 +284,20 @@ html[ytpv-adblock] #movie_player.ad-showing .ytp-ad-player-overlay-layout {
 /* ---------------------------------------------------------------------
    FEATURE 6 — Cinema Mode overlays
    --------------------------------------------------------------------- */
-.ytpv-cinema { position: fixed; inset: 0; z-index: 2100; pointer-events: none; }
-.ytpv-cinema[hidden] { display: none; }
-.ytpv-cinema__region {
-  position: absolute;
-  top: 0;
-  left: 0;
-  will-change: transform;
+.ytpv-cinema {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  pointer-events: none;
   background: rgba(0, 0, 0, var(--ytpv-dim, 0.25));
   -webkit-backdrop-filter: blur(var(--ytpv-blur, 3px)) saturate(0.9);
   backdrop-filter: blur(var(--ytpv-blur, 3px)) saturate(0.9);
   transition: opacity 0.45s var(--ytpv-ease);
 }
-.ytpv-cinema__region--clear { opacity: 0; }
+.ytpv-cinema[hidden] { display: none; }
+.ytpv-cinema--clear { opacity: 0; }
 /* The AI panel sits on the right; never blur on top of it. */
-html[ytpv-ai-open] .ytpv-cinema__region--right { opacity: 0; }
+html[ytpv-ai-open] .ytpv-cinema { opacity: 0; }
 
 /* ---------------------------------------------------------------------
    Action bar pills (Download / AI Summary) — YouTube's native look
@@ -724,7 +723,7 @@ html[dark] .ytpv-pill--ai .ytpv-pill__icon { fill: #ff7aa2; }
 html:not([dark]) .ytpv-pill { background: var(--yt-spec-badge-chip-background, rgba(0, 0, 0, 0.05)); color: var(--yt-spec-text-primary, #0f0f0f); }
 
 @media (prefers-reduced-motion: reduce) {
-  .ytpv-ai, .ytpv-toast, .ytpv-menu, .ytpv-speed, .ytpv-cinema__region, .ytpv-boost__pop, .ytpv-msg, .ytpv-card { transition: none !important; animation: none !important; }
+  .ytpv-ai, .ytpv-toast, .ytpv-menu, .ytpv-speed, .ytpv-cinema, .ytpv-boost__pop, .ytpv-msg, .ytpv-card { transition: none !important; animation: none !important; }
 }
 .ytpv-key__note { margin: 8px 0 0 !important; font-size: 12px; color: var(--ytpv-muted); }
 .ytpv-key__note:empty { display: none; }

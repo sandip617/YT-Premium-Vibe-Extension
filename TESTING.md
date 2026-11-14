@@ -46,7 +46,8 @@ Tip: also test once **after navigating between videos without reloading**. That'
 
 ## 6. Cinema Mode
 - [ ] Turn on → in normal watch view the header, sidebar, area under the video and side margins are softly blurred and dimmed. The video stays sharp.
-- [ ] Hover the sidebar → it smoothly un-blurs. Hover the title/comments area → that clears. Move back over the video → everything blurs again.
+- [ ] The blur is one even layer with no seams. Move the mouse off the video → it smoothly clears. Move back over the video → it blurs again.
+- [ ] Open a video with theater mode on → it switches back to the normal layout (suggestions right, comments below).
 - [ ] Clicks on blurred areas still work (e.g. click a suggestion).
 - [ ] Scroll down to comments (video off screen) → blur disappears.
 - [ ] Fullscreen → no blur. Theater mode → blur follows the bigger player.
