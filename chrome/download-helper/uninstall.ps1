@@ -9,7 +9,7 @@ $Dest = Join-Path $env:LOCALAPPDATA 'YTPremiumVibe'
 Get-ChildItem -LiteralPath (Join-Path $Dest 'jobs') -Filter '*.pid' -ErrorAction SilentlyContinue | ForEach-Object {
   $procId = 0
   if ([int]::TryParse((Get-Content -LiteralPath $_.FullName -Raw).Trim(), [ref]$procId) -and $procId -gt 4) {
-    $null = & taskkill.exe /PID $procId /T /F 2>&1
+    $null = & cmd.exe /d /c "taskkill /PID $procId /T /F >nul 2>&1"
   }
 }
 
