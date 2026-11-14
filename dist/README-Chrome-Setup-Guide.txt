@@ -43,6 +43,7 @@ Download button (Windows, one-time setup)
   4. Click "Download" under any YouTube video. Files go to your Downloads folder,
      and "Show in folder" opens it when done.
   No admin rights needed. It works in Chrome, Edge and Brave.
+  To remove it later: double-click UNINSTALL-DOWNLOAD-HELPER.bat in the same folder.
   Mac or Linux with Chrome: one-click download isn't available; the button offers
   "Copy yt-dlp command" instead (or use the Safari version on Mac).
 
