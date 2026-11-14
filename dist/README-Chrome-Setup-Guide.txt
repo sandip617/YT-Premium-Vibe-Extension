@@ -34,11 +34,17 @@ STEP 3 — AI Summary (free)
   Click "বাংলা" at the top of the panel for summaries in Bangla.
 
 
-Download button
----------------
-One-click download only works in the Safari (Mac) version. In Chrome, the
-Download button offers "Copy yt-dlp command" so you can run it in a terminal
-if you have yt-dlp installed (https://github.com/yt-dlp/yt-dlp).
+Download button (Windows, one-time setup)
+-----------------------------------------
+  1. In the "YT-Premium-Vibe-for-Chrome" folder, double-click INSTALL-DOWNLOAD-HELPER.bat.
+     If Windows says "Windows protected your PC", click "More info" -> "Run anyway".
+  2. Wait until it says "Done!" (it downloads yt-dlp and ffmpeg, a few minutes), then press a key.
+  3. Close every Chrome window and open Chrome again.
+  4. Click "Download" under any YouTube video. Files go to your Downloads folder,
+     and "Show in folder" opens it when done.
+  No admin rights needed. It works in Chrome, Edge and Brave.
+  Mac or Linux with Chrome: one-click download isn't available; the button offers
+  "Copy yt-dlp command" instead (or use the Safari version on Mac).
 
 
 Updating

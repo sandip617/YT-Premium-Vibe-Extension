@@ -22,8 +22,9 @@ It has 11 features in one extension, and each one can be turned on or off from a
 
 **Using Chrome (or Edge/Brave)?** Download `YT-Premium-Vibe-for-Chrome.zip` from the same release
 and follow `README-Chrome-Setup-Guide.txt` inside (chrome://extensions → Developer mode → Load unpacked).
-Everything works except one-click Download, which needs the Mac app; Chrome offers a copyable yt-dlp command instead.
-Rebuild that zip with `./make-chrome-package.sh`.
+On Windows, one-click Download works after running `INSTALL-DOWNLOAD-HELPER.bat` once (in the same folder);
+it installs a small native-messaging helper plus yt-dlp and ffmpeg in `%LOCALAPPDATA%\YTPremiumVibe`. Source is in [chrome/](chrome/).
+Rebuild that zip with `./make-chrome-package.sh` (it adds a fixed extension ID and the helper; the Safari build is untouched).
 
 ---
 

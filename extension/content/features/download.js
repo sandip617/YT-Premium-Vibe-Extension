@@ -59,7 +59,7 @@
     } else if (res?.error === 'native_unavailable') {
       YTPV.toast(YTPV.isSafari
         ? 'Can’t reach the YT Premium Vibe app. Open it once from Applications, then try again.'
-        : 'One-click download works only in the Safari (Mac) version. Copy the yt-dlp command and run it in Terminal instead.', {
+        : 'The download helper isn’t installed. On Windows, double-click INSTALL-DOWNLOAD-HELPER.bat in the extension folder, restart Chrome, then try again.', {
         sticky: true,
         action: [{ label: 'Copy yt-dlp command', onClick: () => copy(cliCommand(url, mode)) }, { label: 'Dismiss' }]
       });
@@ -115,11 +115,11 @@
     if (res.state === 'done') {
       jobs.delete(videoId);
       render();
-      const name = res.file ? res.file.split('/').pop() : job.title;
+      const name = res.file ? res.file.split(/[\\/]/).pop() : job.title;
       YTPV.toast(`Done ✓  ${name}`, {
         icon: YTPV.ICONS.check,
         duration: 10000,
-        action: res.file ? { label: 'Show in Finder', onClick: () => native({ cmd: 'reveal', path: res.file }) } : null
+        action: res.file ? { label: YTPV.isSafari ? 'Show in Finder' : 'Show in folder', onClick: () => native({ cmd: 'reveal', path: res.file }) } : null
       });
     } else if (res.state === 'error') {
       jobs.delete(videoId);

@@ -203,7 +203,7 @@
         status.className = 'status bad';
         status.textContent = api.runtime.getURL('').startsWith('safari')
           ? 'Can’t reach the YT Premium Vibe app. Open it once from Applications (or run it from Xcode), then try again.'
-          : 'One-click download works only in the Safari (Mac) version. In Chrome, use the "Copy yt-dlp command" option under a video.';
+          : 'The download helper isn’t installed. On Windows, double-click INSTALL-DOWNLOAD-HELPER.bat in the extension folder, then restart Chrome.';
       }
     });
     return [
