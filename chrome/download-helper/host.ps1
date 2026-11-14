@@ -18,6 +18,15 @@ $YtDlp = Join-Path $Bin 'yt-dlp.exe'
 $Ffmpeg = Join-Path $Bin 'ffmpeg.exe'
 New-Item -ItemType Directory -Force -Path $Jobs | Out-Null
 
+# Small log for troubleshooting on a friend's PC (%LOCALAPPDATA%\YTPremiumVibe\host.log), kept under ~200 KB.
+$LogFile = Join-Path $Root 'host.log'
+function Log([string]$text) {
+  try {
+    if ((Test-Path -LiteralPath $LogFile) -and (Get-Item -LiteralPath $LogFile).Length -gt 200KB) { Remove-Item -LiteralPath $LogFile -Force }
+    Add-Content -LiteralPath $LogFile -Value ("{0:yyyy-MM-dd HH:mm:ss} {1}" -f (Get-Date), $text) -Encoding UTF8
+  } catch {}
+}
+
 # ---------------------------------------------------------------- messaging
 
 function Read-Exact($stream, [int]$count) {
@@ -34,7 +43,7 @@ function Read-Exact($stream, [int]$count) {
 function Read-Message {
   $in = [Console]::OpenStandardInput()
   $len = Read-Exact $in 4
-  if ($null -eq $len) { return $null }
+  if ($null -eq $len) { Log 'no message on stdin'; return $null }
   $body = Read-Exact $in ([BitConverter]::ToInt32($len, 0))
   if ($null -eq $body) { return $null }
   return ([Text.Encoding]::UTF8.GetString($body) | ConvertFrom-Json)
@@ -277,5 +286,7 @@ try {
   }
 } catch {
   $reply = @{ ok = $false; error = 'helper'; message = $_.Exception.Message }
+  Log "error in '$($msg.cmd)': $($_.Exception.Message) at line $($_.InvocationInfo.ScriptLineNumber)"
 }
+if ($reply.ok -eq $false) { Log "'$($msg.cmd)' -> $($reply | ConvertTo-Json -Compress)" }
 Write-Message $reply

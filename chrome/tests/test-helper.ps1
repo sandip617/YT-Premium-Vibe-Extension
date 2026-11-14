@@ -34,7 +34,10 @@ function Send-Native($obj) {
   $err = $p.StandardError.ReadToEnd()
   if (-not $p.WaitForExit(120000)) { $p.Kill(); throw 'host did not exit' }
   $bytes = $ms.ToArray()
-  if ($bytes.Length -lt 4) { throw "No reply from host. stderr: $err" }
+  if ($bytes.Length -lt 4) {
+    $log = Get-Content -Raw -LiteralPath (Join-Path $Dest 'host.log') -ErrorAction SilentlyContinue
+    throw "No reply from host (exit $($p.ExitCode)). stderr: $err`nhost.log: $log"
+  }
   $len = [BitConverter]::ToInt32($bytes, 0)
   if ($bytes.Length -ne 4 + $len) { throw "Reply framing is wrong: $($bytes.Length) bytes for length $len. stderr: $err" }
   return [Text.Encoding]::UTF8.GetString($bytes, 4, $len) | ConvertFrom-Json
