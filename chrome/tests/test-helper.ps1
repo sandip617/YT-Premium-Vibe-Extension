@@ -91,6 +91,7 @@ Run-Raw 'powershell.exe' "-NoProfile -NonInteractive -ExecutionPolicy Bypass -Fi
 Write-Host "DIAG  probe.txt exists: $(Test-Path (Join-Path $env:RUNNER_TEMP 'probe.txt'))"
 $hp = Join-Path $Dest 'host.ps1'
 Run-Raw 'powershell.exe' "-NoProfile -NonInteractive -ExecutionPolicy Bypass -Command `"& '$hp'; 'exit:' + `$LASTEXITCODE`""
+Run-Raw 'powershell.exe' "-NoProfile -NonInteractive -ExecutionPolicy Bypass -Command `"Set-PSDebug -Trace 1; & '$hp' *>&1 | Out-String -Stream | Select-Object -Last 60`""
 $tokens = $null; $perr = $null
 [void][Management.Automation.Language.Parser]::ParseFile($hp, [ref]$tokens, [ref]$perr)
 Write-Host "DIAG  parse errors: $(($perr | ForEach-Object { "line $($_.Extent.StartLineNumber): $($_.Message)" }) -join ' | ')"
