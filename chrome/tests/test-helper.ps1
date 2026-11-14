@@ -66,6 +66,27 @@ $manifest = Get-Content -Raw -LiteralPath (Join-Path $Dest "$HostName.json") | C
 Assert ($manifest.allowed_origins -contains 'chrome-extension://dcofaohpknfljeceeomhhdhophljdabo/') 'install: manifest allows the extension ID'
 Assert (Test-Path -LiteralPath $manifest.path) 'install: manifest path exists'
 
+# ---- launch diagnostics (printed so a failure below is easy to read)
+function Run-Raw([string]$file, [string]$arguments) {
+  $psi = New-Object Diagnostics.ProcessStartInfo
+  $psi.FileName = $file; $psi.Arguments = $arguments; $psi.UseShellExecute = $false
+  $psi.RedirectStandardInput = $true; $psi.RedirectStandardOutput = $true; $psi.RedirectStandardError = $true
+  $p = [Diagnostics.Process]::Start($psi)
+  $body = [Text.Encoding]::UTF8.GetBytes('{"cmd":"restore"}')
+  $p.StandardInput.BaseStream.Write([BitConverter]::GetBytes([int]$body.Length), 0, 4)
+  $p.StandardInput.BaseStream.Write($body, 0, $body.Length)
+  $p.StandardInput.Close()
+  $out = $p.StandardOutput.ReadToEnd(); $err = $p.StandardError.ReadToEnd(); $p.WaitForExit()
+  Write-Host "DIAG  $file $arguments`n      exit=$($p.ExitCode) stdout=[$out] stderr=[$err]"
+}
+$hostBat = Join-Path $Dest 'host.bat'
+Write-Host "DIAG  files: $((Get-ChildItem $Dest | ForEach-Object Name) -join ', ')"
+Write-Host "DIAG  host.bat bytes: $(([IO.File]::ReadAllBytes($hostBat) | ForEach-Object { '{0:x2}' -f $_ }) -join ' ')"
+Run-Raw 'cmd.exe' "/d /c `"`"$hostBat`" chrome-extension://x/`""
+Run-Raw 'cmd.exe' "/d /c `"$hostBat`""
+Run-Raw 'powershell.exe' "-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File `"$(Join-Path $Dest 'host.ps1')`""
+Write-Host "DIAG  host.log: $(Get-Content -Raw -LiteralPath (Join-Path $Dest 'host.log') -ErrorAction SilentlyContinue)"
+
 # ---- check
 $t = Measure-Command { $c = Send-Native @{ cmd = 'check' } }
 Assert ($c.ok -and $c.version -match '^\d{4}\.\d') "check: yt-dlp $($c.version)"
