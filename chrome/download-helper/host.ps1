@@ -163,12 +163,14 @@ function Cmd-Download($msg) {
 
   # One small .cmd per job: run yt-dlp, keep its output, then record the exit code.
   $cmdFile = Job-File $id 'cmd'
+  # Each line in its own parentheses: in PowerShell "," binds tighter than "+".
+  $run = (@($YtDlp) + $a | ForEach-Object { Quote-Cmd $_ }) -join ' '
   $lines = @(
     '@echo off',
     'chcp 65001 >nul',
     'set PYTHONIOENCODING=utf-8',
-    ((@($YtDlp) + $a | ForEach-Object { Quote-Cmd $_ }) -join ' ') + ' > ' + (Quote-Cmd (Job-File $id 'log')) + ' 2>&1',
-    '>' + (Quote-Cmd (Job-File $id 'exit')) + ' echo %ERRORLEVEL%'
+    ($run + ' > ' + (Quote-Cmd (Job-File $id 'log')) + ' 2>&1'),
+    ('>' + (Quote-Cmd (Job-File $id 'exit')) + ' echo %ERRORLEVEL%')
   )
   [IO.File]::WriteAllText($cmdFile, ($lines -join "`r`n") + "`r`n", (New-Object Text.UTF8Encoding $false))
 
@@ -257,7 +259,8 @@ function Cmd-Cancel($msg) {
   $procId = 0
   if ($pidText -and [int]::TryParse($pidText.Trim(), [ref]$procId) -and $procId -gt 4) {
     # /T also stops yt-dlp and ffmpeg started by the job's cmd.exe
-    $null = & taskkill.exe /PID $procId /T /F 2>&1
+    # Through cmd so "process not found" (already finished) can't throw under ErrorActionPreference=Stop.
+    $null = & cmd.exe /d /c "taskkill /PID $procId /T /F >nul 2>&1"
   }
   return @{ ok = $true }
 }
