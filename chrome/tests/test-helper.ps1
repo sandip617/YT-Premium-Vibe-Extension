@@ -85,6 +85,16 @@ Write-Host "DIAG  host.bat bytes: $(([IO.File]::ReadAllBytes($hostBat) | ForEach
 Run-Raw 'cmd.exe' "/d /c `"`"$hostBat`" chrome-extension://x/`""
 Run-Raw 'cmd.exe' "/d /c `"$hostBat`""
 Run-Raw 'powershell.exe' "-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File `"$(Join-Path $Dest 'host.ps1')`""
+$probe = Join-Path $env:RUNNER_TEMP 'probe.ps1'
+Set-Content -LiteralPath $probe -Value '"probe ran" | Out-File -FilePath "$env:RUNNER_TEMP\probe.txt"; [Console]::Out.Write("probe-stdout")'
+Run-Raw 'powershell.exe' "-NoProfile -NonInteractive -ExecutionPolicy Bypass -File `"$probe`""
+Write-Host "DIAG  probe.txt exists: $(Test-Path (Join-Path $env:RUNNER_TEMP 'probe.txt'))"
+$hp = Join-Path $Dest 'host.ps1'
+Run-Raw 'powershell.exe' "-NoProfile -NonInteractive -ExecutionPolicy Bypass -Command `"& '$hp'; 'exit:' + `$LASTEXITCODE`""
+$tokens = $null; $perr = $null
+[void][Management.Automation.Language.Parser]::ParseFile($hp, [ref]$tokens, [ref]$perr)
+Write-Host "DIAG  parse errors: $(($perr | ForEach-Object { "line $($_.Extent.StartLineNumber): $($_.Message)" }) -join ' | ')"
+Write-Host "DIAG  jobs dir exists: $(Test-Path (Join-Path $Dest 'jobs'))"
 Write-Host "DIAG  host.log: $(Get-Content -Raw -LiteralPath (Join-Path $Dest 'host.log') -ErrorAction SilentlyContinue)"
 
 # ---- check
