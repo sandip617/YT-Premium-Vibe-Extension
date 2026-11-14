@@ -23,7 +23,7 @@ m["key"] = key
 open(path, "w").write(json.dumps(m, indent=2, ensure_ascii=False) + "\n")
 EOF
 # Windows tools expect CRLF line endings in .bat/.ps1/.txt files.
-find "$STAGE" \( -name '*.bat' -o -name '*.ps1' -o -name '*.txt' \) -exec perl -pi -e 's/\r?\n/\r\n/' {} +
+find "$STAGE" \( -name '*.bat' -o -name '*.ps1' -o -name '*.cs' -o -name '*.txt' \) -exec perl -pi -e 's/\r?\n/\r\n/' {} +
 find "$STAGE" -name .DS_Store -delete
 
 OUT="$ROOT/dist/YT-Premium-Vibe-for-Chrome.zip"

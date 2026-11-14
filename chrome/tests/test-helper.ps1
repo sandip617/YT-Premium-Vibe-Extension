@@ -65,38 +65,7 @@ foreach ($b in @('Google\Chrome', 'Microsoft\Edge', 'BraveSoftware\Brave-Browser
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $Dest "$HostName.json") | ConvertFrom-Json
 Assert ($manifest.allowed_origins -contains 'chrome-extension://dcofaohpknfljeceeomhhdhophljdabo/') 'install: manifest allows the extension ID'
 Assert (Test-Path -LiteralPath $manifest.path) 'install: manifest path exists'
-
-# ---- launch diagnostics (printed so a failure below is easy to read)
-function Run-Raw([string]$file, [string]$arguments) {
-  $psi = New-Object Diagnostics.ProcessStartInfo
-  $psi.FileName = $file; $psi.Arguments = $arguments; $psi.UseShellExecute = $false
-  $psi.RedirectStandardInput = $true; $psi.RedirectStandardOutput = $true; $psi.RedirectStandardError = $true
-  $p = [Diagnostics.Process]::Start($psi)
-  $body = [Text.Encoding]::UTF8.GetBytes('{"cmd":"restore"}')
-  $p.StandardInput.BaseStream.Write([BitConverter]::GetBytes([int]$body.Length), 0, 4)
-  $p.StandardInput.BaseStream.Write($body, 0, $body.Length)
-  $p.StandardInput.Close()
-  $out = $p.StandardOutput.ReadToEnd(); $err = $p.StandardError.ReadToEnd(); $p.WaitForExit()
-  Write-Host "DIAG  $file $arguments`n      exit=$($p.ExitCode) stdout=[$out] stderr=[$err]"
-}
-$hostBat = Join-Path $Dest 'host.bat'
-Write-Host "DIAG  files: $((Get-ChildItem $Dest | ForEach-Object Name) -join ', ')"
-Write-Host "DIAG  host.bat bytes: $(([IO.File]::ReadAllBytes($hostBat) | ForEach-Object { '{0:x2}' -f $_ }) -join ' ')"
-Run-Raw 'cmd.exe' "/d /c `"`"$hostBat`" chrome-extension://x/`""
-Run-Raw 'cmd.exe' "/d /c `"$hostBat`""
-Run-Raw 'powershell.exe' "-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File `"$(Join-Path $Dest 'host.ps1')`""
-$probe = Join-Path $env:RUNNER_TEMP 'probe.ps1'
-Set-Content -LiteralPath $probe -Value '"probe ran" | Out-File -FilePath "$env:RUNNER_TEMP\probe.txt"; [Console]::Out.Write("probe-stdout")'
-Run-Raw 'powershell.exe' "-NoProfile -NonInteractive -ExecutionPolicy Bypass -File `"$probe`""
-Write-Host "DIAG  probe.txt exists: $(Test-Path (Join-Path $env:RUNNER_TEMP 'probe.txt'))"
-$hp = Join-Path $Dest 'host.ps1'
-Run-Raw 'powershell.exe' "-NoProfile -NonInteractive -ExecutionPolicy Bypass -Command `"& '$hp'; 'exit:' + `$LASTEXITCODE`""
-Run-Raw 'powershell.exe' "-NoProfile -NonInteractive -ExecutionPolicy Bypass -Command `"Set-PSDebug -Trace 1; & '$hp' *>&1 | Out-String -Stream | Select-Object -Last 60`""
-$tokens = $null; $perr = $null
-[void][Management.Automation.Language.Parser]::ParseFile($hp, [ref]$tokens, [ref]$perr)
-Write-Host "DIAG  parse errors: $(($perr | ForEach-Object { "line $($_.Extent.StartLineNumber): $($_.Message)" }) -join ' | ')"
-Write-Host "DIAG  jobs dir exists: $(Test-Path (Join-Path $Dest 'jobs'))"
-Write-Host "DIAG  host.log: $(Get-Content -Raw -LiteralPath (Join-Path $Dest 'host.log') -ErrorAction SilentlyContinue)"
+Assert ($manifest.path.EndsWith('host.exe')) 'install: host.exe built'
 
 # ---- check
 $t = Measure-Command { $c = Send-Native @{ cmd = 'check' } }
