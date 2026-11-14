@@ -7,6 +7,9 @@ $ErrorActionPreference = 'Stop'
 $HostName = 'com.ytpremiumvibe.app'
 $Dest = Join-Path $env:LOCALAPPDATA 'YTPremiumVibe'
 $failures = 0
+# .NET Framework's Process.StandardInput writes a UTF-8 BOM first when the console
+# encoding has one, which would corrupt the 4-byte length. Chrome sends no BOM; neither do we.
+[Console]::InputEncoding = New-Object Text.UTF8Encoding $false
 
 function Assert($cond, [string]$what) {
   if ($cond) { Write-Host "PASS  $what" -ForegroundColor Green }
@@ -65,7 +68,6 @@ foreach ($b in @('Google\Chrome', 'Microsoft\Edge', 'BraveSoftware\Brave-Browser
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $Dest "$HostName.json") | ConvertFrom-Json
 Assert ($manifest.allowed_origins -contains 'chrome-extension://dcofaohpknfljeceeomhhdhophljdabo/') 'install: manifest allows the extension ID'
 Assert (Test-Path -LiteralPath $manifest.path) 'install: manifest path exists'
-Assert ($manifest.path.EndsWith('host.exe')) 'install: host.exe built'
 
 # ---- check
 $t = Measure-Command { $c = Send-Native @{ cmd = 'check' } }

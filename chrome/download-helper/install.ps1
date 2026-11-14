@@ -34,21 +34,15 @@ function Get-Verified([string]$url, [string]$sumsUrl, [string]$name, [string]$ou
 
 try {
   Step 'Copying the helper'
-  Copy-Item -Force -LiteralPath (Join-Path $Src 'host.ps1') -Destination $Dest
-  Remove-Item -Force -LiteralPath (Join-Path $Dest 'host.bat') -ErrorAction SilentlyContinue # older versions
+  Copy-Item -Force -LiteralPath (Join-Path $Src 'host.ps1'), (Join-Path $Src 'host.bat') -Destination $Dest
   Get-ChildItem -LiteralPath $Dest -File | Unblock-File
-
-  Step 'Building host.exe (the small program Chrome talks to)'
-  $exe = Join-Path $Dest 'host.exe'
-  Remove-Item -Force -LiteralPath $exe -ErrorAction SilentlyContinue
-  Add-Type -TypeDefinition (Get-Content -Raw -LiteralPath (Join-Path $Src 'relay.cs')) -OutputAssembly $exe -OutputType ConsoleApplication
 
   Step 'Registering it with Chrome, Edge and Brave'
   $manifestPath = Join-Path $Dest "$HostName.json"
   $manifest = [ordered]@{
     name            = $HostName
     description     = 'YT Premium Vibe download helper'
-    path            = (Join-Path $Dest 'host.exe')
+    path            = (Join-Path $Dest 'host.bat')
     type            = 'stdio'
     allowed_origins = @("chrome-extension://$ExtensionId/")
   }

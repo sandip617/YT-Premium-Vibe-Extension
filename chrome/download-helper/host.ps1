@@ -1,7 +1,7 @@
 # YT Premium Vibe - download helper for Chrome/Edge/Brave on Windows.
 #
-# Chrome starts host.exe (relay.cs) for every chrome.runtime.sendNativeMessage call; it
-# passes the message here as base64 JSON in $args[0], and sends our UTF-8 JSON stdout back.
+# Chrome starts this (through host.bat) for every chrome.runtime.sendNativeMessage call,
+# with one message on stdin (4-byte length + UTF-8 JSON) and expects one reply on stdout.
 # It speaks the same commands as the Mac app (SafariWebExtensionHandler.swift):
 #   check, download, status, cancel, reveal.  backup/restore are Mac-only (Safari wipes
 #   storage, Chrome doesn't), so they answer ok:false and the extension carries on.
@@ -10,7 +10,6 @@
 # and Chrome's process job). It writes its output to jobs\<id>.log, its exit code to
 # jobs\<id>.exit and the final file path to jobs\<id>.path; "status" just reads them.
 
-$MessageB64 = $args[0]
 $ErrorActionPreference = 'Stop'
 $Root = $PSScriptRoot
 $Bin = Join-Path $Root 'bin'
@@ -30,15 +29,30 @@ function Log([string]$text) {
 
 # ---------------------------------------------------------------- messaging
 
-function Read-Message {
-  if (-not $script:MessageB64) { Log 'no message'; return $null }
-  return ([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($script:MessageB64)) | ConvertFrom-Json)
+function Read-Exact($stream, [int]$count) {
+  $buf = New-Object byte[] $count
+  $n = 0
+  while ($n -lt $count) {
+    $r = $stream.Read($buf, $n, $count - $n)
+    if ($r -le 0) { return $null }
+    $n += $r
+  }
+  return , $buf
 }
 
-# Raw UTF-8 bytes (not Write-Output), so non-English file names survive; host.exe adds the length.
+function Read-Message {
+  $in = [Console]::OpenStandardInput()
+  $len = Read-Exact $in 4
+  if ($null -eq $len) { Log 'no message on stdin'; return $null }
+  $body = Read-Exact $in ([BitConverter]::ToInt32($len, 0))
+  if ($null -eq $body) { return $null }
+  return ([Text.Encoding]::UTF8.GetString($body) | ConvertFrom-Json)
+}
+
 function Write-Message($obj) {
   $bytes = [Text.Encoding]::UTF8.GetBytes(($obj | ConvertTo-Json -Compress -Depth 5))
   $out = [Console]::OpenStandardOutput()
+  $out.Write([BitConverter]::GetBytes([int]$bytes.Length), 0, 4)
   $out.Write($bytes, 0, $bytes.Length)
   $out.Flush()
 }
