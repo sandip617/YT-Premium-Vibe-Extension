@@ -20,6 +20,11 @@ It has 11 features in one extension, and each one can be turned on or off from a
 **Just want to install it?** Download the latest `YT-Premium-Vibe-for-Mac.zip` from
 [Releases](../../releases) and follow `README-Setup-Guide.txt` inside. No Xcode needed.
 
+**Using Chrome (or Edge/Brave)?** Download `YT-Premium-Vibe-for-Chrome.zip` from the same release
+and follow `README-Chrome-Setup-Guide.txt` inside (chrome://extensions → Developer mode → Load unpacked).
+Everything works except one-click Download, which needs the Mac app; Chrome offers a copyable yt-dlp command instead.
+Rebuild that zip with `./make-chrome-package.sh`.
+
 ---
 
 ## Build from source

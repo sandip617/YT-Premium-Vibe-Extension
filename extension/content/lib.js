@@ -8,6 +8,8 @@
 (() => {
   const YTPV = (globalThis.YTPV = globalThis.YTPV || {});
   YTPV.api = globalThis.browser || globalThis.chrome;
+  // Downloads need the macOS app (native messaging), which only the Safari build has.
+  YTPV.isSafari = YTPV.api.runtime.getURL('').startsWith('safari');
   YTPV.features = [];
   YTPV.register = (feature) => YTPV.features.push(feature);
 

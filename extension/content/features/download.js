@@ -57,7 +57,9 @@
         ]
       });
     } else if (res?.error === 'native_unavailable') {
-      YTPV.toast('Can’t reach the YT Premium Vibe app. Open it once from Applications, then try again.', {
+      YTPV.toast(YTPV.isSafari
+        ? 'Can’t reach the YT Premium Vibe app. Open it once from Applications, then try again.'
+        : 'One-click download works only in the Safari (Mac) version. Copy the yt-dlp command and run it in Terminal instead.', {
         sticky: true,
         action: [{ label: 'Copy yt-dlp command', onClick: () => copy(cliCommand(url, mode)) }, { label: 'Dismiss' }]
       });

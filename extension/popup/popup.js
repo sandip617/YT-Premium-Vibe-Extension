@@ -201,7 +201,9 @@
         status.textContent = res.error || 'yt-dlp could not be set up.';
       } else {
         status.className = 'status bad';
-        status.textContent = 'Can’t reach the YT Premium Vibe app. Open it once from Applications (or run it from Xcode), then try again.';
+        status.textContent = api.runtime.getURL('').startsWith('safari')
+          ? 'Can’t reach the YT Premium Vibe app. Open it once from Applications (or run it from Xcode), then try again.'
+          : 'One-click download works only in the Safari (Mac) version. In Chrome, use the "Copy yt-dlp command" option under a video.';
       }
     });
     return [
