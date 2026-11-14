@@ -1,0 +1,17 @@
+name: Windows download helper
+
+on:
+  push:
+    paths: ['chrome/**', '.github/workflows/windows-helper.yml']
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      # Windows PowerShell 5.1: the version friends' PCs have.
+      - name: Install, talk to it like Chrome, uninstall
+        shell: powershell
+        run: powershell.exe -NoProfile -ExecutionPolicy Bypass -File chrome\tests\test-helper.ps1

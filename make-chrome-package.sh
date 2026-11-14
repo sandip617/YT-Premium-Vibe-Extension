@@ -13,8 +13,8 @@ STAGE="$(mktemp -d)"
 trap 'rm -rf "$STAGE"' EXIT
 
 ditto "$ROOT/extension" "$STAGE"
-ditto "$ROOT/chrome/download-helper" "$STAGE/download-helper"
-cp "$ROOT/chrome/INSTALL-DOWNLOAD-HELPER.bat" "$ROOT/dist/README-Chrome-Setup-Guide.txt" "$STAGE/"
+ditto "$ROOT/chrome/download-helper" "$STAGE/download-helper"  # chrome/tests stays out of the zip
+cp "$ROOT/chrome/INSTALL-DOWNLOAD-HELPER.bat" "$ROOT/chrome/UNINSTALL-DOWNLOAD-HELPER.bat" "$ROOT/dist/README-Chrome-Setup-Guide.txt" "$STAGE/"
 python3 -I - "$STAGE/manifest.json" "$ROOT/chrome/manifest-key.txt" <<'EOF'
 import json, sys
 path, key = sys.argv[1], open(sys.argv[2]).read().strip()
